@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Finance Tracker
 
-## Getting Started
+Aplikasi pencatatan pemasukan dan pengeluaran pribadi. Dashboard menampilkan saldo, ringkasan transaksi, visualisasi grafik, daftar transaksi, serta ekspor CSV.
 
-First, run the development server:
+## Fungsionalitas
+
+- Halaman registrasi, login, dan dashboard.
+- Tambah, edit, dan hapus transaksi.
+- Ringkasan pemasukan, pengeluaran, dan saldo.
+- Grafik transaksi menggunakan Recharts.
+- Ekspor data ke CSV.
+- Navigasi responsif untuk mobile.
+
+## Teknologi
+
+Next.js 16, React 19, TypeScript, Firebase, Recharts, Tailwind CSS 4, dan Framer Motion.
+
+## Setup
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka `http://localhost:3000`. Integrasi Firebase dikonfigurasi melalui `lib/firebase.ts`; pastikan project Firebase, metode sign-in, dan aturan akses data disesuaikan dengan environment milikmu sebelum menguji akun.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Organisasi source
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+app/                       Pages: auth dan dashboard
+context/AuthContext.tsx    State autentikasi
+hooks/useTransaction.ts    Operasi dan kalkulasi transaksi
+components/dashboard/      Grafik, list, modal, sidebar
+lib/exportCSV.ts           Ekspor CSV
+lib/firebase.ts            Firebase setup
+```
 
-## Learn More
+## Pemeriksaan
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Belum ada skrip unit test dalam manifest. Sebelum digunakan dengan data finansial nyata, tinjau Firebase Security Rules, isolasi data per pengguna, dan perilaku CRUD pada akses tidak sah.
